@@ -6,8 +6,10 @@
 #define SPADE_SPADE_HPP
 
 
-class spade {
+class Spade {
 
+public:
+    int run(int arg);
 };
 
 
