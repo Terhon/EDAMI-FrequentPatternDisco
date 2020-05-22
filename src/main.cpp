@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Spade.hpp"
+#include "Spade.h"
 
 int main()
 {

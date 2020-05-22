@@ -1,0 +1,10 @@
+#ifndef SPADE_CANDIDATEGENERATOR_H
+#define SPADE_CANDIDATEGENERATOR_H
+
+
+class CandidateGenerator {
+
+};
+
+
+#endif //SPADE_CANDIDATEGENERATOR_H
