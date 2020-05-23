@@ -6,13 +6,17 @@
 #include "Pattern.h"
 
 class Spade {
+    std::vector<EquivalenceClass *> *frequentItems;
+
+    std::vector<Pattern *> *getPatterns(std::vector<EquivalenceClass *> *frequentItems);
+
+    int frequentPatternCount;
+
+    int joinCount;
 
 public:
     int run(int arg);
 
-private:
-    std::vector<EquivalenceClass*> *frequentItems;
-    std::vector<Pattern*> *getPatterns(std::vector<EquivalenceClass*> *frequentItems);
 };
 
 

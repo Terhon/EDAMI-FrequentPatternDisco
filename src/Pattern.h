@@ -3,7 +3,12 @@
 
 
 class Pattern {
+public:
+    bool isPrefix(Pattern *p) {
+        bool output = false;
 
+        return output;
+    }
 };
 
 

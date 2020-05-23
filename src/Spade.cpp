@@ -18,11 +18,18 @@ int Spade::run(int arg) {
 
     auto frequentPatternEnumeration = new FrequentPatternEnumeration(cg,sup);
     frequentPatternEnumeration->setFrequentPatterns(frequentItems->size());
-    frequentPatternEnumeration->execute();
+    frequentPatternEnumeration->execute(rootClass, true, nullptr, nullptr);
 
-    return frequentPatternEnumeration->getFrequentPatterns();
+    frequentPatternCount = frequentPatternEnumeration->getFrequentPatterns();
+    joinCount = frequentPatternEnumeration->getJoinCount();
+
+    return arg;
 }
 
 std::vector<Pattern*> *Spade::getPatterns(std::vector<EquivalenceClass*> *frequentItems) {
-
+    auto *patterns = new std::vector<Pattern*>;
+    for(auto frequentItem : *frequentItems) {
+        patterns->push_back(frequentItem->getClassIdentifier());
+    }
+    return patterns;
 }
