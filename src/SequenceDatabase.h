@@ -7,7 +7,7 @@
 class SequenceDatabase {
 
 public:
-    std::vector<EquivalenceClass*>* getFrequentItems();
+    std::vector<EquivalenceClass*>* getFrequentItems(); //TODO
 };
 
 

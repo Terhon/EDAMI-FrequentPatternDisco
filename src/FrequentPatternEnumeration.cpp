@@ -10,7 +10,7 @@ void FrequentPatternEnumeration::execute(EquivalenceClass *eq, bool depthFirst,
         std::map<int, int> *cmapX_equals = nullptr;
         int itemX;
         if (coocMapAfter != nullptr || coocMapEquals != nullptr) {
-            //itemX = (*it)->getClassIdentifier() TODO: PATTERN
+            itemX = (*it)->getClassIdentifier()->getLastElement()->getId();
             cmapX = (coocMapAfter == nullptr) ? nullptr : &coocMapAfter->at(itemX);
             cmapX_equals = (coocMapEquals == nullptr) ? nullptr : &coocMapEquals->at(itemX);
         }
@@ -21,7 +21,7 @@ void FrequentPatternEnumeration::execute(EquivalenceClass *eq, bool depthFirst,
             bool doNotExploreX_Y = false;
             bool doNotExploreY_X = false;
             if (coocMapEquals != nullptr) {
-                int itemY = 0;//TODO
+                int itemY = (*jt)->getClassIdentifier()->getLastElement()->getId();
                 auto *cmapY = &coocMapEquals->at(itemY);
                 int count1 = cmapX_equals == nullptr ? 0 : cmapX_equals->at(itemY);
                 int count2 = cmapY == nullptr ? 0 : cmapY->at(itemX);
@@ -29,7 +29,7 @@ void FrequentPatternEnumeration::execute(EquivalenceClass *eq, bool depthFirst,
                 doNotExploreXY = count1 == 0 || count1 < minSupport;
             }
             if (coocMapAfter != nullptr) {
-                int itemY = 0;//TODO
+                int itemY = (*jt)->getClassIdentifier()->getLastElement()->getId();
                 auto *cmapY = &coocMapAfter->at(itemY);
                 int count1 = cmapX == nullptr ? 0 : cmapX->at(itemY);
                 int count2 = cmapY == nullptr ? 0 : cmapY->at(itemX);
@@ -40,15 +40,15 @@ void FrequentPatternEnumeration::execute(EquivalenceClass *eq, bool depthFirst,
                 continue;
             }
 
-            std::list<Pattern *> *extensions = candidateGenerator->generateCandidates((*it)->getClassIdentifier(), (*jt)->getClassIdentifier(),
+            std::vector<Pattern *> *extensions = candidateGenerator->generateCandidates((*it)->getClassIdentifier(), (*jt)->getClassIdentifier(),
                                                                                       minSupport, doNotExploreXY, doNotExploreYX, doNotExploreX_Y, doNotExploreY_X);
-            for(auto ex = extensions->begin(); ex != extensions->end(); ++ex) {
-                IdList *newIdList = candidateGenerator->join(*ex, **it, **jt, minSupport);
+            for (auto &extension : *extensions) {
+                IdList *newIdList = candidateGenerator->join(extension, *it, *jt, minSupport);
                 joinCount++;
                 if(newIdList != nullptr && newIdList->getSupport() >= minSupport) {
                     anyPatternCreated = true;
-                    newIdList->setAppearingSequences(*ex);
-                    auto *newEq = new EquivalenceClass(*ex);
+                    newIdList->setAppearingSequences(extension);
+                    auto *newEq = new EquivalenceClass(extension);
                     newEq->setIdList(newIdList);
                     frequentPatterns++;
                 }

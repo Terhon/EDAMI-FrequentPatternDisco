@@ -4,9 +4,19 @@
 #include "Pattern.h"
 
 class IdList {
+    std::vector<bool> *sequences = new std::vector<bool>;
+
 public:
-    double getSupport() {}
-    void setAppearingSequences(Pattern *pattern) {}
+    int getSupport() {
+        return sequences->size();
+    }
+    void setAppearingSequences(Pattern *pattern) {
+        pattern->setAppearingIn(sequences);
+    }
+
+    IdList *join(IdList *idList, bool equals, int minSupport) {
+        //TODO
+    }
 };
 
 

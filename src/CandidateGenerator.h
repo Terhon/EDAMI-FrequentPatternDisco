@@ -8,10 +8,10 @@
 
 class CandidateGenerator {
 public:
-    std::list<Pattern *> *generateCandidates(Pattern *p1, Pattern *p2, double minSupport, bool doNotExploreXY, bool doNotExploreYX,
-                       bool doNotExploreX_Y, bool doNotExploreY_X) {};
+    std::vector<Pattern *> *generateCandidates(Pattern *p1, Pattern *p2, double minSupport, bool doNotExploreXY, bool doNotExploreYX,
+                       bool doNotExploreX_Y, bool doNotExploreY_X);
 
-    IdList *join(Pattern *extension, EquivalenceClass e1, EquivalenceClass e2, double minSupport) {};
+    IdList *join(Pattern *extension, EquivalenceClass *e1, EquivalenceClass *e2, int minSupport);
 };
 
 

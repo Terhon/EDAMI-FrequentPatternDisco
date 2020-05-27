@@ -7,14 +7,14 @@
 
 class FrequentPatternEnumeration {
     CandidateGenerator *candidateGenerator;
-    double minSupport;
+    int minSupport;
     int frequentPatterns = 0;
     int joinCount = 0;
 
     void insertClassByPrefix(EquivalenceClass *eq, EquivalenceClass *eqX, EquivalenceClass *eqY);
 
 public:
-    FrequentPatternEnumeration(CandidateGenerator *candidateGenerator, double minSupport) : candidateGenerator(
+    FrequentPatternEnumeration(CandidateGenerator *candidateGenerator, int minSupport) : candidateGenerator(
             candidateGenerator), minSupport(minSupport) {}
 
     void setFrequentPatterns(int frequentPatternCount) {
