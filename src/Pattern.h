@@ -9,6 +9,8 @@ class Pattern {
     std::vector<bool> *appearingIn = new std::vector<bool>;
 
 public:
+    explicit Pattern(std::vector<Item*> *elements) : elements(elements) {}
+
     bool isPrefix(Pattern *p) {
         bool output = false;
         std::vector<Item*> *pElements = p->getElements();
@@ -41,11 +43,25 @@ public:
     }
 
     Pattern *clonePattern(){
-        //TODO
+        auto *elementsCopy = new std::vector<Item*>(*elements);
+        auto *clone = new Pattern(elementsCopy);
+        return clone;
     }
 
     int compareTo(Pattern *p){
-        //TODO
+        int comp;
+        if(elements->back()->getId() > p->elements->back()->getId())
+            comp = 1;
+        else if(elements->back()->getId() < p->elements->back()->getId())
+            comp = -1;
+        else if(elements->back()->isEqualRelation() && p->elements->back()->isEqualRelation())
+            comp = 0;
+        else if(!elements->back()->isEqualRelation() && p->elements->back()->isEqualRelation())
+            comp = -1;
+        else
+            comp = 1;
+
+        return comp;
     }
 };
 
