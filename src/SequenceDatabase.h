@@ -22,6 +22,8 @@ public:
         }
         return items;
     }
+
+    void reduceDatabase(std::vector<Item*> *items);
 };
 
 
