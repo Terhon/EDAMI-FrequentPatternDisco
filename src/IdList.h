@@ -5,7 +5,7 @@
 #include <map>
 
 class IdList {
-    auto *entries = new std::map<int, std::vector<int> *>();
+    std::map<int, std::vector<int> *> *entries = new std::map<int, std::vector<int> *>();
     std::vector<bool> *sequences = new std::vector<bool>;
 
     std::vector<int> *equalOperation(int sid, std::vector<int> *transAppereances);

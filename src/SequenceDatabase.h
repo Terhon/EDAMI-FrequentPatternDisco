@@ -7,8 +7,8 @@
 
 class SequenceDatabase {
 
-    auto *frequentItems = new std::map<Item*, EquivalenceClass*>;
-    auto *sequences = new std::vector<std::map<long, std::vector<Item*>*>*>;
+    std::map<Item*, EquivalenceClass*> *frequentItems = new std::map<Item*, EquivalenceClass*>;
+    std::vector<std::map<long, std::vector<Item*>*>*> *sequences = new std::vector<std::map<long, std::vector<Item*>*>*>;
 
 public:
     void loadFile(std::string path, double minSupport);

@@ -11,8 +11,8 @@ void SequenceDatabase::addSequence(long timestamp, std::vector<std::vector<int> 
     for (auto &integer : *integers) {
         auto *itemset = new std::vector<Item *>;
         for (auto &id : *integer) {
-            EquivalenceClass *ec = (*std::find_if(frequentItems->begin(), frequentItems->end(), [id](Item *item) {
-                return item->getId() == id;
+            EquivalenceClass *ec = (*std::find_if(frequentItems->begin(), frequentItems->end(), [id](std::pair<Item* const, EquivalenceClass*> pair) {
+                return pair.first->getId() == id;
             })).second;
             IdList *idList = nullptr;
             if (ec == nullptr) {
