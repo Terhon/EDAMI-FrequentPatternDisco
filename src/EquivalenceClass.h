@@ -11,7 +11,7 @@ class EquivalenceClass {
     IdList *idList;
     std::list<EquivalenceClass *> *members = new std::list<EquivalenceClass *>;
 public:
-    EquivalenceClass(Pattern *classId = nullptr, IdList *idList = nullptr,
+    explicit EquivalenceClass(Pattern *classId = nullptr, IdList *idList = nullptr,
                      std::list<EquivalenceClass *> *members = nullptr) : classId(classId), idList(idList),
                                                                          members(members) {}
 
