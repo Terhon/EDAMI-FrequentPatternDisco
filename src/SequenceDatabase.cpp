@@ -64,16 +64,23 @@ void SequenceDatabase::addSequence(long timestamp, std::vector<std::vector<int> 
 }
 
 void SequenceDatabase::reduceDatabase(std::vector<Item *> *items) {
-    //TODO
-    /*auto s = sequences->begin();
-    while(s != sequences->end()) {
-        for(auto &itemset : **s) {
-            for(auto &item : itemset) {
-                if(std::find(items->begin(),items->end(),item) == items->end()) {
-                    itemset->erase(s);
+
+    for(auto &s : *sequences) {
+        auto itemset = s->begin();
+        while(itemset != s->end()) {
+            auto item = (*itemset).second->begin();
+            while(item != (*itemset).second->end()) {
+                if(std::find(items->begin(),items->end(),*item) == items->end()) {
+                    (*itemset).second->erase(item);
+                } else {
+                    item++;
                 }
             }
-
         }
-    }*/
+        if((*itemset).second->empty()) {
+            s->erase(itemset);
+        } else {
+            itemset++;
+        }
+    }
 }
