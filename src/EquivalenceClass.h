@@ -12,7 +12,7 @@ class EquivalenceClass {
     std::list<EquivalenceClass *> *members = new std::list<EquivalenceClass *>;
 public:
     explicit EquivalenceClass(Pattern *classId = nullptr, IdList *idList = nullptr,
-                     std::list<EquivalenceClass *> *members = nullptr) : classId(classId), idList(idList),
+                     std::list<EquivalenceClass *> *members = new std::list<EquivalenceClass *>) : classId(classId), idList(idList),
                                                                          members(members) {}
 
     void addMember(EquivalenceClass *eqClass) { members->push_back(eqClass); }

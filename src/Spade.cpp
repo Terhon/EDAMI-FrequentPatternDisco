@@ -5,8 +5,11 @@
 
 int Spade::run(int arg) {
     auto *db = new SequenceDatabase();
+    db->addSequence(10, new std::vector<std::vector<int>*>({new std::vector<int>({2,2,2,4}), new std::vector<int>({1,2,2,4})}));
+    db->addSequence(20, new std::vector<std::vector<int>*>({new std::vector<int>({3,4,4})}));
+
     auto *cg = new CandidateGenerator();
-    auto sup = 0.1;
+    auto sup = 5;
 
     frequentItems = db->getFrequentItems();
     auto *patterns = getPatterns(frequentItems);
