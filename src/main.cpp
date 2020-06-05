@@ -3,7 +3,7 @@
 
 int main() {
     auto *s = new Spade();
-    std::cout << s->run(10);
+    s->run();
     s->printResults();
     /*auto l = new std::list<int>;
     l->push_back(1);

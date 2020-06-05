@@ -3,6 +3,7 @@
 
 #include "Pattern.h"
 #include <map>
+#include <algorithm>
 
 class IdList {
     std::map<int, std::vector<int> *> *entries = new std::map<int, std::vector<int> *>();
@@ -27,7 +28,29 @@ public:
         pattern->setAppearingIn(sequences);
     }
 
+    void addAppereance(int seq, long timestamp) {
+        std::vector<int> *entry = nullptr;
+        if(entries->find(seq) == entries->end()) {
+            entry = new std::vector<int>;
+        } else {
+            entry = entries->at(seq);
+        }
+        if(std::find(entry->begin(), entry->end(), timestamp) == entry->end()) {
+            entry->push_back(timestamp);
+            entries->insert({seq, entry});
+            if(sequences->size() <= seq) {
+                int size = seq - sequences->size() + 1;
+                for(int i = 0; i < size; i++) {
+                    sequences->push_back(false);
+                }
+            }
+            sequences->at(seq) = true;
+        }
+    }
+
     IdList *join(IdList *idList, bool equals, int minSupport);
+
+    std::map<int, std::vector<int> *> *getEntries() { return entries; };
 };
 
 

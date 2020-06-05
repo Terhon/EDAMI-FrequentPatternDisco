@@ -3,13 +3,11 @@
 #include "FrequentPatternEnumeration.h"
 #include "SequenceDatabase.h"
 
-int Spade::run(int arg) {
+void Spade::run() {
     auto *db = new SequenceDatabase();
-    db->addSequence(10, new std::vector<std::vector<int>*>({new std::vector<int>({2,2,2,4}), new std::vector<int>({1,2,2,4})}));
-    db->addSequence(20, new std::vector<std::vector<int>*>({new std::vector<int>({3,4,4})}));
-
+    db->loadFile("",0.1);
     auto *cg = new CandidateGenerator();
-    auto sup = 5;
+    auto sup = 3;
 
     frequentItems = db->getFrequentItems();
     auto *patterns = getPatterns(frequentItems);
@@ -25,8 +23,6 @@ int Spade::run(int arg) {
 
     frequentPatternCount = frequentPatternEnumeration->getFrequentPatterns();
     joinCount = frequentPatternEnumeration->getJoinCount();
-
-    return arg;
 }
 
 std::vector<Pattern*> *Spade::getPatterns(std::vector<EquivalenceClass*> *frequentItems) {

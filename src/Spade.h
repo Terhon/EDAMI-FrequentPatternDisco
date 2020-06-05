@@ -16,7 +16,7 @@ class Spade {
     int joinCount;
 
 public:
-    int run(int arg);
+    void run();
 
     void printResults() {
         std::cout << "frequentPatternCount:" << frequentPatternCount << std::endl;
@@ -25,7 +25,14 @@ public:
             for(auto &el : *item->getClassIdentifier()->getElements()) {
                 std::cout << el->getId() << ", ";
             }
-            std::cout << std::endl;
+            std::cout << "sup:" << item->getIdList()->getSupport() << " (";
+            for(auto &entry : *item->getIdList()->getEntries()) {
+                std::cout << entry.first << " | ";
+                for(auto &id : *entry.second) {
+                    std::cout << id << ", ";
+                }
+            }
+            std::cout << ")" << std::endl << std::endl;
         }
     }
 };

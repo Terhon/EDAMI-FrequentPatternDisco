@@ -5,7 +5,7 @@
 
 
 void SequenceDatabase::loadFile(std::string path, double minSupport) {
-    std::ifstream file(path);
+    /*std::ifstream file(path);
     std::string line;
     //fileline structure: timestamp item1 item2 , item1 item3
     //example: 10 1 2 , 1 3
@@ -20,7 +20,11 @@ void SequenceDatabase::loadFile(std::string path, double minSupport) {
         } while (false);
         //
         addSequence(timestamp, data);
-    }
+    }*/
+    addSequence(10, new std::vector<std::vector<int>*>({new std::vector<int>({2,2,2,4}), new std::vector<int>({1,2,2,4})}));
+    addSequence(20, new std::vector<std::vector<int>*>({new std::vector<int>({3,4,4})}));
+    addSequence(30, new std::vector<std::vector<int>*>({new std::vector<int>({3,1,4}), new std::vector<int>({2,5,4})}));
+
     double support = minSupport * sequences->size();
 
     auto *itemsToRemove = new std::vector<Item*>;
@@ -54,7 +58,9 @@ void SequenceDatabase::addSequence(long timestamp, std::vector<std::vector<int> 
                 ec = new EquivalenceClass(new Pattern(new std::vector<Item*>({item})), idList);
                 frequentItems->insert({item, ec});
             }
-            //idList = ec->getIdList();
+            idList = ec->getIdList();
+            idList->addAppereance(sequences->size(), timestamp);
+
             auto *item = new Item(id, true);
             itemset->push_back(item);
         }
@@ -65,7 +71,6 @@ void SequenceDatabase::addSequence(long timestamp, std::vector<std::vector<int> 
 }
 
 void SequenceDatabase::reduceDatabase(std::vector<Item *> *items) {
-
     for(auto &s : *sequences) {
         auto itemset = s->begin();
         while(itemset != s->end()) {

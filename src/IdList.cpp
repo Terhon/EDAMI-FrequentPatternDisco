@@ -14,6 +14,12 @@ IdList *IdList::join(IdList *idList, bool equals, int minSupport) {
 
         if(transAppereances != nullptr) {
             intersection->emplace(entry.first, transAppereances);
+            if(newSequences->size() <= entry.first) {
+                int size = entry.first - newSequences->size() + 1;
+                for(int i = 0; i < size; i++) {
+                    newSequences->push_back(false);
+                }
+            }
             newSequences->at(entry.first) = true;
         }
     }
